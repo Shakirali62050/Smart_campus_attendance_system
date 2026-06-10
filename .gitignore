@@ -1,0 +1,8 @@
+Database/users.txt
+Attendance/
+static/faces/
+
+venv/
+__pycache__/
+*.pyc
+.env

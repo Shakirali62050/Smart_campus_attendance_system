@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+.git/
+Attendance/
+*.pyc
+*.pyo
+*.log
