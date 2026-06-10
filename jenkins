@@ -8,34 +8,40 @@ pipeline {
 
     stages {
 
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Shakirali62050/Smart_campus_attendance_system.git'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t faceattendance .'
+                sh 'docker build -t faceattendance:latest .'
             }
         }
 
         stage('Load Image into Minikube') {
             steps {
-                bat 'minikube image load faceattendance'
+                sh 'minikube image load faceattendance:latest'
             }
         }
 
         stage('Deploy Kubernetes') {
             steps {
-                bat 'kubectl apply -f k8s/'
+                sh 'kubectl apply -f k8s/'
             }
         }
 
         stage('Check Deployment') {
             steps {
-                bat 'kubectl get pods'
-                bat 'kubectl get svc'
+                sh 'kubectl get pods'
+                sh 'kubectl get svc'
             }
         }
     }
 
     post {
-
         success {
             echo 'Deployment Successful!'
         }
